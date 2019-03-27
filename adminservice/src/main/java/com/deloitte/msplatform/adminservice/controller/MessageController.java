@@ -7,15 +7,15 @@ import javax.annotation.Resource;
 
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author abhidas
  *
  */
-@Controller
+@RestController
 @RefreshScope
 @RequestMapping(value = "/message")
 public class MessageController {
@@ -23,9 +23,9 @@ public class MessageController {
 	@Resource
 	Environment env;
 	
-	@GetMapping(value = "/health")
+	@GetMapping
     public String displayEnvMessage() {
-		String msg = env.getProperty("system.health.message");
+		String msg = env.getProperty("system.health.message","BLANK");
 		System.out.println("system.health.message: "+msg);
         return msg;
     }
