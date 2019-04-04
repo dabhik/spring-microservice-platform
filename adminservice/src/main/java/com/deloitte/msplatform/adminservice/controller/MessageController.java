@@ -3,6 +3,8 @@
  */
 package com.deloitte.msplatform.adminservice.controller;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.annotation.Resource;
 
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -28,5 +30,16 @@ public class MessageController {
 		String msg = env.getProperty("system.custom.message","BLANK");
 		System.out.println("system.custom.message: "+msg);
         return msg;
+    }
+	@GetMapping("/poor")
+    public String showPoorPerformance() {
+		try {
+            // Simulate random poor performing method!
+            if(ThreadLocalRandom.current().nextInt() > 0.5)
+                Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
