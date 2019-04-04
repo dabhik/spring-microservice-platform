@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RefreshScope
-@RequestMapping(value = "/message")
+@RequestMapping(value = "/admin")
 public class MessageController {
 	
 	@Resource
 	Environment env;
 	
-	@GetMapping
+	@GetMapping("/message")
     public String displayEnvMessage() {
-		String msg = env.getProperty("system.health.message","BLANK");
-		System.out.println("system.health.message: "+msg);
+		String msg = env.getProperty("system.custom.message","BLANK");
+		System.out.println("system.custom.message: "+msg);
         return msg;
     }
 }
